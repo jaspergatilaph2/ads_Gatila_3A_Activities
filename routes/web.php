@@ -1,5 +1,6 @@
 <?php
 use App\Models\student;
+use App\Models\Course;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,3 +49,18 @@ Route::get('/student/delete', function(){
     $student->delete();
     return 'Student Deleted!';
 });
+
+Route::get('/course/create', function(){
+    $course = new Course();
+    $course->course_name = 'introduction to Databases';
+    $course->save();
+    return 'Course Created';
+}
+);
+
+Route::get('/course/{id}/student', function($id){
+    $course = Course::find($id);
+    return $course->student;
+}
+);
+
